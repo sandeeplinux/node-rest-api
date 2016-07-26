@@ -27,7 +27,7 @@ it('should list ALL torrents on /torrents GET', function(done) {
 
 it('should list a SINGLE torrent on /torrents/<id>', function(done) {
   chai.request(server)
-    .get('/torrents/576fcd7bbe47ece8332dbe45')
+    .get('/torrents/577b4484ee5209307191a64e')
     .end(function(err, res){
       res.should.have.status(200);
 	  done();
@@ -46,7 +46,7 @@ it('should add a SINGLE torrent on /torrents POST', function(done) {
 
 it('should update a SINGLE torrent on /torrents/<id>/edit POST', function(done) {
   chai.request(server)
-    .post('/torrents/578df60d0179c8220c010081/edit')
+    .post('/torrents/577b4484ee5209307191a64e/edit')
     .send({'name': 'Shiv', 'torrent_link': 'www.inverosoft.com'})
     .end(function(err, res){
       res.should.have.status(200);
@@ -56,7 +56,7 @@ it('should update a SINGLE torrent on /torrents/<id>/edit POST', function(done) 
 
 it('should delete a SINGLE torrent on /torrents/<id>/delete POST', function(done) {
   chai.request(server)
-    .get('/torrents/578df60d0179c8220c010081/delete')
+    .get('/torrents/577b4484ee5209307191a64e/delete')
     .end(function(err, res){
       res.should.have.status(200);
       done();

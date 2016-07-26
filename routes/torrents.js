@@ -3,7 +3,7 @@ var express = require('express'),
     mongoose = require('mongoose'), //mongo connection
     bodyParser = require('body-parser'), //parses information from POST
     methodOverride = require('method-override'); //used to manipulate POST
-	
+
 router.use(bodyParser.urlencoded({ extended: true }))
 router.use(methodOverride(function(req, res){
       if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -38,16 +38,16 @@ router.route('/')
                               "torrents" : torrents
                           });
 						 */
-						
+
 							res.json(torrents);
-						
+
                     },
                     //JSON response will show all blobs in JSON format
                     json: function(){
                         res.json(torrents);
                     }
                 });
-              }     
+              }
         });
     })
     //POST a new blob
@@ -90,11 +90,11 @@ router.route('/')
               }
         })
     });
-	
+
 /* GET New Blob page. */
 router.get('/new', function(req, res) {
     res.render('torrents/new', { title: 'Add New Torrent' });
-});	
+});
 
 // route middleware to validate :id
 router.param('id', function(req, res, next, id) {
@@ -123,8 +123,8 @@ router.param('id', function(req, res, next, id) {
             // once validation is done save the new item in the req
             req.id = id;
             // go to the next thing
-            next(); 
-        } 
+            next();
+        }
     });
 });
 
@@ -155,8 +155,8 @@ router.param('id', function(req, res, next, id) {
             // once validation is done save the new item in the req
             req.id = id;
             // go to the next thing
-            next(); 
-        } 
+            next();
+        }
     });
 });
 
@@ -191,13 +191,13 @@ router.route('/:id')
       }
     });
   });
-  
-  
+
+
 router.post('/:id/edit', function(req, res) {
     // Get our REST or form values. These rely on the "name" attributes
     var name = req.body.name;
     var torrent_link = req.body.torrent_link;
-    
+
 
    //find the document by ID
         mongoose.model('Torrent').findById(req.id, function (err, torrent) {
@@ -205,11 +205,11 @@ router.post('/:id/edit', function(req, res) {
             torrent.update({
                 name : name,
                 torrent_link : torrent_link,
-                
+
             }, function (err, torrent) {
               if (err) {
                   res.send("There was a problem updating the information to the database: " + err);
-              } 
+              }
               else {
                       //HTML responds by going back to the page or you can be fancy and create a new view that shows a success page.
                       res.format({
@@ -224,8 +224,8 @@ router.post('/:id/edit', function(req, res) {
                }
             })
         });
-		
-	});	
+
+	});
 
 //DELETE a Blob by ID
 router.get('/:id/delete', function (req, res){
